@@ -1,0 +1,8 @@
+﻿{
+  "profiles": {
+    "SupportChat.CodeGenApp": {
+      "commandName": "Project",
+      "commandLineArgs": ""
+    }
+  }
+}
