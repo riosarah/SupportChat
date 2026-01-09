@@ -1,22 +1,113 @@
 ﻿<!--@CodeCopy-->
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-4">
-      <div class="card">
-        <div class="card-header">{{ 'AUTH.LOGIN' | translate }}</div>
-        <div class="card-body">
+<div class="login-container">
+  <div class="login-background"></div>
+  <div class="container h-100">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-md-5 col-lg-4">
+        <div class="login-card">
+          <!-- Logo/Brand Section -->
+          <div class="text-center mb-4">
+            <div class="login-icon">
+              <i class="bi bi-shield-lock-fill"></i>
+            </div>
+            <h2 class="login-title">{{ 'APP.TITLE' | translate }}</h2>
+            <p class="text-muted">{{ 'AUTH.LOGIN_SUBTITLE' | translate }}</p>
+          </div>
+
+          <!-- Login Form -->
           <form (submit)="onLogin(); $event.preventDefault()">
             <div class="mb-3">
-              <label for="email" class="form-label">{{ 'AUTH.EMAIL' | translate }}</label>
-              <input type="text" id="email" [(ngModel)]="email" name="email" class="form-control" required>
+              <label for="email" class="form-label">
+                <i class="bi bi-envelope me-1"></i>
+                {{ 'AUTH.EMAIL' | translate }}
+              </label>
+              <input 
+                type="email" 
+                id="email" 
+                [(ngModel)]="email" 
+                name="email" 
+                class="form-control form-control-lg" 
+                placeholder="name@example.com"
+                required
+                autocomplete="email">
             </div>
+
             <div class="mb-3">
-              <label for="password" class="form-label">{{ 'AUTH.PASSWORD' | translate }}</label>
-              <input type="password" id="password" [(ngModel)]="password" name="password" class="form-control" required>
+              <label for="password" class="form-label">
+                <i class="bi bi-lock me-1"></i>
+                {{ 'AUTH.PASSWORD' | translate }}
+              </label>
+              <div class="input-group">
+                <input 
+                  [type]="showPassword ? 'text' : 'password'" 
+                  id="password" 
+                  [(ngModel)]="password" 
+                  name="password" 
+                  class="form-control form-control-lg" 
+                  placeholder="••••••••"
+                  required
+                  autocomplete="current-password">
+                <button 
+                  class="btn btn-outline-secondary" 
+                  type="button"
+                  (click)="togglePasswordVisibility()">
+                  <i [class]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+                </button>
+              </div>
             </div>
-            <button type="submit" class="btn btn-primary w-100">{{ 'AUTH.LOGIN' | translate }}</button>
-            <div *ngIf="error" class="alert alert-danger mt-2" style="white-space: pre-wrap;">{{ error }}</div>
+
+            <div *ngIf="error" class="alert alert-danger" role="alert">
+              <i class="bi bi-exclamation-triangle-fill me-2"></i>
+              {{ 'AUTH.LOGIN_ERROR' | translate }}
+            </div>
+
+            <button 
+              type="submit" 
+              class="btn btn-primary btn-lg w-100 mb-3"
+              [disabled]="isLoading">
+              <span *ngIf="!isLoading">
+                <i class="bi bi-box-arrow-in-right me-2"></i>
+                {{ 'AUTH.LOGIN' | translate }}
+              </span>
+              <span *ngIf="isLoading">
+                <span class="spinner-border spinner-border-sm me-2"></span>
+                {{ 'AUTH.LOGGING_IN' | translate }}
+              </span>
+            </button>
           </form>
+
+          <!-- Demo Credentials -->
+          <div class="demo-credentials">
+            <div class="text-center mb-2">
+              <small class="text-muted">{{ 'AUTH.DEMO_ACCOUNTS' | translate }}</small>
+            </div>
+            <div class="demo-account" (click)="fillCredentials('sysadmin@gmx.at', '1234SysAdmin')">
+              <i class="bi bi-person-gear"></i>
+              <div>
+                <strong>SysAdmin</strong>
+                <small>sysadmin&#64;gmx.at</small>
+              </div>
+            </div>
+            <div class="demo-account" (click)="fillCredentials('appadmin@gmx.at', '1234AppAdmin')">
+              <i class="bi bi-person-badge"></i>
+              <div>
+                <strong>AppAdmin</strong>
+                <small>appadmin&#64;gmx.at</small>
+              </div>
+            </div>
+            <div class="demo-account" (click)="fillCredentials('appuser@gmx.at', '1234AppUser')">
+              <i class="bi bi-person"></i>
+              <div>
+                <strong>AppUser</strong>
+                <small>appuser&#64;gmx.at</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center mt-3 text-white-50">
+          <small>© 2025 SupportChat. All rights reserved.</small>
         </div>
       </div>
     </div>

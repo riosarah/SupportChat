@@ -1,0 +1,199 @@
+<div class="chat-history-container">
+  <!-- Header -->
+  <div class="history-header">
+    <div class="header-content">
+      <h1>
+        <i class="bi bi-clock-history"></i>
+        {{ 'CHAT_HISTORY.TITLE' | translate }}
+      </h1>
+      <p class="header-subtitle">{{ 'CHAT_HISTORY.SUBTITLE' | translate }}</p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="history-content">
+    <div class="container-fluid">
+      <div class="row">
+        
+        <!-- Sidebar: Ticket List -->
+        <div class="col-md-4" [class.d-none]="selectedTicket" [class.d-md-block]="selectedTicket">
+          <div class="tickets-sidebar">
+            
+            <!-- Filter -->
+            <div class="filter-section">
+              <label class="filter-label">{{ 'CHAT_HISTORY.FILTER' | translate }}</label>
+              <select class="form-select" [(ngModel)]="filterStatus" (change)="applyFilter()">
+                <option value="all">{{ 'CHAT_HISTORY.ALL_TICKETS' | translate }}</option>
+                <option value="unresolved">{{ 'CHAT_HISTORY.UNRESOLVED' | translate }}</option>
+                <option value="resolved">{{ 'CHAT_HISTORY.RESOLVED' | translate }}</option>
+              </select>
+            </div>
+
+            <!-- Loading -->
+            <div *ngIf="isLoading" class="loading-state">
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              <p>{{ 'CHAT_HISTORY.LOADING' | translate }}</p>
+            </div>
+
+            <!-- Empty State -->
+            <div *ngIf="!isLoading && filteredTickets.length === 0" class="empty-state">
+              <i class="bi bi-inbox"></i>
+              <p>{{ 'CHAT_HISTORY.NO_TICKETS' | translate }}</p>
+            </div>
+
+            <!-- Ticket List -->
+            <div class="tickets-list">
+              <div 
+                *ngFor="let ticket of filteredTickets" 
+                class="ticket-item"
+                [class.active]="selectedTicket?.id === ticket.id"
+                (click)="selectTicket(ticket)">
+                
+                <div class="ticket-header">
+                  <span class="ticket-id">Ticket #{{ ticket.id }}</span>
+                  <span class="ticket-date">{{ formatDate(ticket.startTime) }}</span>
+                </div>
+                
+                <div class="ticket-problem">
+                  {{ ticket.problemDescription }}
+                </div>
+                
+                <div class="ticket-footer">
+                  <span class="badge" [ngClass]="getStatusClass(ticket.status)">
+                    {{ (ticket.status === TicketStatus.Resolved ? 'CHAT_HISTORY.STATUS_RESOLVED' : 'CHAT_HISTORY.STATUS_UNRESOLVED') | translate }}
+                  </span>
+                  <span class="badge" [ngClass]="getPriorityClass(ticket.priority)">
+                    {{ 'CHAT_HISTORY.PRIORITY_' + ticket.priority | translate }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detail View: Chat Messages -->
+        <div class="col-md-8" [class.d-none]="!selectedTicket" [class.d-block]="selectedTicket">
+          <div class="chat-detail" *ngIf="selectedTicket">
+            
+            <!-- Detail Header -->
+            <div class="detail-header">
+              <button class="btn btn-link back-button d-md-none" (click)="closeDetail()">
+                <i class="bi bi-arrow-left"></i>
+              </button>
+              <div class="detail-header-content">
+                <h2>Ticket #{{ selectedTicket.id }}</h2>
+                <div class="detail-meta">
+                  <span class="badge" [ngClass]="getStatusClass(selectedTicket.status)">
+                    {{ (selectedTicket.status === TicketStatus.Resolved ? 'CHAT_HISTORY.STATUS_RESOLVED' : 'CHAT_HISTORY.STATUS_UNRESOLVED') | translate }}
+                  </span>
+                  <span class="badge" [ngClass]="getPriorityClass(selectedTicket.priority)">
+                    {{ 'CHAT_HISTORY.PRIORITY_' + selectedTicket.priority | translate }}
+                  </span>
+                  <span class="detail-date">{{ formatDate(selectedTicket.startTime) }}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Actions Section -->
+            <div class="actions-section">
+              <div class="action-group">
+                <label>{{ 'CHAT_HISTORY.STATUS_LABEL' | translate }}:</label>
+                <div class="btn-group" role="group">
+                  <button 
+                    class="btn btn-sm"
+                    [class.btn-success]="selectedTicket.status === TicketStatus.Resolved"
+                    [class.btn-outline-success]="selectedTicket.status !== TicketStatus.Resolved"
+                    (click)="updateStatus(selectedTicket, TicketStatus.Resolved)">
+                    <i class="bi bi-check-circle me-1"></i>
+                    {{ 'CHAT_HISTORY.STATUS_RESOLVED' | translate }}
+                  </button>
+                  <button 
+                    class="btn btn-sm"
+                    [class.btn-warning]="selectedTicket.status === TicketStatus.Unresolved"
+                    [class.btn-outline-warning]="selectedTicket.status !== TicketStatus.Unresolved"
+                    (click)="updateStatus(selectedTicket, TicketStatus.Unresolved)">
+                    <i class="bi bi-clock-history me-1"></i>
+                    {{ 'CHAT_HISTORY.STATUS_UNRESOLVED' | translate }}
+                  </button>
+                </div>
+              </div>
+
+              <div class="action-group">
+                <label>{{ 'CHAT_HISTORY.PRIORITY_LABEL' | translate }}:</label>
+                <select 
+                  class="form-select form-select-sm"
+                  [value]="selectedTicket.priority"
+                  (change)="updatePriority(selectedTicket, +$any($event.target).value)">
+                  <option [value]="TicketPriority.Low">{{ 'CHAT_HISTORY.PRIORITY_LOW' | translate }}</option>
+                  <option [value]="TicketPriority.Medium">{{ 'CHAT_HISTORY.PRIORITY_MEDIUM' | translate }}</option>
+                  <option [value]="TicketPriority.High">{{ 'CHAT_HISTORY.PRIORITY_HIGH' | translate }}</option>
+                  <option [value]="TicketPriority.Critical">{{ 'CHAT_HISTORY.PRIORITY_CRITICAL' | translate }}</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Problem Description -->
+            <div class="problem-section">
+              <h5>{{ 'CHAT_HISTORY.PROBLEM' | translate }}</h5>
+              <p>{{ selectedTicket.problemDescription }}</p>
+            </div>
+
+            <!-- Messages -->
+            <div class="messages-section">
+              <h5>{{ 'CHAT_HISTORY.CONVERSATION' | translate }}</h5>
+              
+              <!-- Loading Messages -->
+              <div *ngIf="isLoadingMessages" class="text-center py-4">
+                <div class="spinner-border text-primary" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
+
+              <!-- Messages List -->
+              <div class="messages-container" *ngIf="!isLoadingMessages">
+                <div 
+                  *ngFor="let message of messages" 
+                  class="message"
+                  [class.user-message]="message.isUserMessage"
+                  [class.bot-message]="!message.isUserMessage">
+                  
+                  <div class="message-header">
+                    <span class="message-author">
+                      <i [class.bi-person-fill]="message.isUserMessage" [class.bi-robot]="!message.isUserMessage"></i>
+                      {{ (message.isUserMessage ? 'CHAT_HISTORY.YOU' : 'CHAT_HISTORY.ASSISTANT') | translate }}
+                    </span>
+                    <span class="message-time">{{ formatTime(message.timestamp) }}</span>
+                  </div>
+                  
+                  <div class="message-content" [innerHTML]="message.content | nl2br"></div>
+                </div>
+
+                <div *ngIf="messages.length === 0" class="empty-messages">
+                  <i class="bi bi-chat-left-text"></i>
+                  <p>{{ 'CHAT_HISTORY.NO_MESSAGES' | translate }}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- System Info (collapsed) -->
+            <div class="system-info-section" *ngIf="selectedTicket.systemInfo">
+              <details>
+                <summary>{{ 'CHAT_HISTORY.SYSTEM_INFO' | translate }}</summary>
+                <pre>{{ selectedTicket.systemInfo }}</pre>
+              </details>
+            </div>
+          </div>
+
+          <!-- No Selection State -->
+          <div class="no-selection" *ngIf="!selectedTicket">
+            <i class="bi bi-chat-square-text"></i>
+            <p>{{ 'CHAT_HISTORY.SELECT_TICKET' | translate }}</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
