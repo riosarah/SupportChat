@@ -1,5 +1,6 @@
 ﻿//@CodeCopy
 export interface ILogon {
-  email: string;
-  password: string;
+  Email: string;
+  Password: string;
+  info?: string;  // Optional: Client-Info (z.B. Browser, User-Agent)
 }

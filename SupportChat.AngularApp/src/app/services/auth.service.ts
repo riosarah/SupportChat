@@ -64,15 +64,27 @@ export class AuthService {
    * @returns The authenticated user.
    */
   public async login(email: string, password: string): Promise<IAuthenticatedUser> {
+    console.log('🔑 [AUTH-SERVICE] login() aufgerufen');
+    console.log('🔑 [AUTH-SERVICE] Email:', email);
+    
     const logonData = {
-      email: email,
-      password: password,
+      Email: email,
+      Password: password,
+      info: `Angular Client - ${navigator.userAgent}` // Client-Info für Backend-Logging
     } as ILogon;
+    console.log('🔑 [AUTH-SERVICE] LogonData erstellt:', { ...logonData, Password: '***' });
 
+    console.log('🔑 [AUTH-SERVICE] Rufe accountService.login() auf...');
     this._user = await this.accountService.login(logonData);
+    console.log('🔑 [AUTH-SERVICE] accountService.login() Response:', this._user);
+    
     if (this._user) {
+      console.log('🔑 [AUTH-SERVICE] User vorhanden, speichere in Storage');
       this.updateUserInStorage(this._user);
       this.notifyForUserChanged();
+      console.log('🔑 [AUTH-SERVICE] User gespeichert und Listener benachrichtigt');
+    } else {
+      console.warn('🔑 [AUTH-SERVICE] Kein User in Response!');
     }
     return this._user;
   }

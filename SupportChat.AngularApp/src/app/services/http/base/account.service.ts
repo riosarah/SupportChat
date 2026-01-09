@@ -15,12 +15,25 @@ export class AccountService {
   constructor(private httpClient: HttpClient) { }
 
   public async login(logonData: ILogon): Promise<IAuthenticatedUser> {
-    return firstValueFrom(
-      this.httpClient.post<IAuthenticatedUser>(
-        this.BASE_URL + '/login',
-        logonData
-      )
-    );
+    console.log('📡 [ACCOUNT-SERVICE] login() aufgerufen');
+    console.log('📡 [ACCOUNT-SERVICE] BASE_URL:', this.BASE_URL);
+    console.log('📡 [ACCOUNT-SERVICE] Login URL:', this.BASE_URL + '/login');
+    console.log('📡 [ACCOUNT-SERVICE] LogonData:', logonData);
+    
+    try {
+      console.log('📡 [ACCOUNT-SERVICE] Sende HTTP POST Request...');
+      const response = await firstValueFrom(
+        this.httpClient.post<IAuthenticatedUser>(
+          this.BASE_URL + '/login',
+          logonData
+        )
+      );
+      console.log('📡 [ACCOUNT-SERVICE] HTTP Response erhalten:', response);
+      return response;
+    } catch (error) {
+      console.error('📡 [ACCOUNT-SERVICE] HTTP Request FEHLER:', error);
+      throw error;
+    }
   }
 
   public logout(sessionToken: string): Promise<any> {

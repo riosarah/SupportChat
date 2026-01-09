@@ -16,13 +16,19 @@ export class AppComponent {
   public isMenuCollapsed = true;
 
   public get isLoginRequired(): boolean {
-    return this.authService.isLoginRequired;
+    const value = this.authService.isLoginRequired;
+    console.log('✅ [APP] isLoginRequired:', value);
+    return value;
   }
   public get isLoggedIn(): boolean {
-    return this.authService.isLoggedIn;
+    const value = this.authService.isLoggedIn;
+    console.log('✅ [APP] isLoggedIn:', value);
+    return value;
   }
   public get userName(): string {
-    return this.authService.user?.name || '';
+    const value = this.authService.user?.name || '';
+    console.log('✅ [APP] userName:', value);
+    return value;
   }
 
   constructor(
@@ -54,9 +60,11 @@ export class AppComponent {
     });
   }
 
-  public logout() {
-    this.authService.logout();
-    this.router.navigate(['/dashboard']);
+  public async logout() {
+    console.log('🚪 [APP] Logout initiiert');
+    await this.authService.logout();
+    console.log('🚪 [APP] Logout abgeschlossen, navigiere zu /auth/login');
+    this.router.navigate(['/auth/login']);
   }
 
   public toggleTheme() {

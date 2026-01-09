@@ -4,14 +4,19 @@
     "BRAND": "SETemplate"
   },
   "NAVIGATION": {
-    "DASHBOARD": "Dashboard"
+    "DASHBOARD": "Dashboard",
+    "CHATBOT": "IT-Support Chat",
+    "CHAT_HISTORY": "Chatverlauf"
   },
   "AUTH": {
     "LOGIN": "Anmelden",
     "LOGOUT": "Abmelden",
     "EMAIL": "E-Mail",
     "PASSWORD": "Passwort",
-    "LOGIN_ERROR": "Anmeldung fehlgeschlagen"
+    "LOGIN_ERROR": "Anmeldung fehlgeschlagen. Bitte überprüfen Sie Ihre Zugangsdaten.",
+    "LOGIN_SUBTITLE": "Melden Sie sich an, um fortzufahren",
+    "LOGGING_IN": "Anmeldung läuft...",
+    "DEMO_ACCOUNTS": "Demo-Konten (zum Ausfüllen klicken)"
   },
   "COMMON": {
     "SAVE": "Speichern",
@@ -33,6 +38,13 @@
   "DASHBOARD": {
     "TITLE": "Dashboard",
     "WELCOME": "Willkommen im SETemplate!",
+    "IT_SUPPORT_TITLE": "IT Support",
+    "IT_SUPPORT_SUBTITLE": "Ihr persönlicher IT-Support-Assistent steht Ihnen zur Verfügung",
+    "NEED_HELP": "Benötigen Sie Hilfe?",
+    "HELP_DESCRIPTION": "Unser IT-Support-Assistent hilft Ihnen schnell und unkompliziert bei allen technischen Problemen. Stellen Sie einfach Ihre Frage!",
+    "ASK_FOR_HELP": "Fragen Sie um Hilfe",
+    "LOGGED_IN_AS": "Angemeldet als",
+    "LOGIN_PROMPT": "Melden Sie sich an, um den IT-Support zu nutzen",
     "PUBLIC_ACCESS": "Öffentlicher Zugang",
     "PROTECTED_AREA": "Geschützter Bereich",
     "STATISTICS": "Statistiken",
@@ -74,5 +86,53 @@
     "DARK": "Dunkel",
     "SWITCH_TO_LIGHT": "Zu hellem Design wechseln",
     "SWITCH_TO_DARK": "Zu dunklem Design wechseln"
+  },
+  "CHATBOT": {
+    "WELCOME_TITLE": "IT-Support Assistent",
+    "WELCOME_SUBTITLE": "Hallo! Ich bin Ihr persönlicher IT-Support-Assistent. Beschreiben Sie mir Ihr Problem und ich helfe Ihnen gerne weiter.",
+    "START_CHAT": "Chat starten",
+    "ASSISTANT_NAME": "IT-Support Assistent",
+    "MARK_RESOLVED": "Problem gelöst",
+    "END_CHAT": "Chat beenden",
+    "INPUT_PLACEHOLDER": "Geben Sie Ihre Nachricht ein...",
+    "INPUT_HINT": "Drücken Sie Enter zum Senden, Shift+Enter für neue Zeile",
+    "FEATURE_FAST": "Schnelle Antworten",
+    "FEATURE_SECURE": "Sicher & Vertraulich",
+    "FEATURE_24_7": "24/7 Verfügbar",
+    "COMMON_TOPICS": "Häufige Themen:",
+    "TOPIC_PRINTER": "Drucker",
+    "TOPIC_NETWORK": "Netzwerk",
+    "TOPIC_PASSWORD": "Passwort",
+    "TOPIC_SOFTWARE": "Software",
+    "TOPIC_HARDWARE": "Hardware"
+  },
+  "CHAT_HISTORY": {
+    "TITLE": "Ticket-Verlauf",
+    "SUBTITLE": "Ihre Support-Tickets",
+    "FILTER": "Filter",
+    "ALL_TICKETS": "Alle Tickets",
+    "RESOLVED": "Gelöst",
+    "UNRESOLVED": "Offen",
+    "LOADING": "Lade Tickets...",
+    "NO_TICKETS": "Keine Tickets gefunden",
+    "SELECT_TICKET": "Wählen Sie ein Ticket aus, um die Konversation anzuzeigen",
+    "NO_MESSAGES": "Keine Nachrichten vorhanden",
+    "STATUS_LABEL": "Status",
+    "STATUS_RESOLVED": "Gelöst",
+    "STATUS_UNRESOLVED": "Offen",
+    "PRIORITY_LABEL": "Priorität",
+    "PRIORITY_0": "Niedrig",
+    "PRIORITY_1": "Mittel",
+    "PRIORITY_2": "Hoch",
+    "PRIORITY_3": "Kritisch",
+    "PRIORITY_LOW": "Niedrig",
+    "PRIORITY_MEDIUM": "Mittel",
+    "PRIORITY_HIGH": "Hoch",
+    "PRIORITY_CRITICAL": "Kritisch",
+    "PROBLEM": "Problem",
+    "CONVERSATION": "Konversation",
+    "YOU": "Sie",
+    "ASSISTANT": "Assistent",
+    "SYSTEM_INFO": "System-Informationen"
   }
 }

@@ -30,10 +30,11 @@ export class DashboardComponent {
   ];
 
   public authCards: DashboardCard[] = [
+    { title: 'NAVIGATION.CHATBOT', text: 'CHATBOT.WELCOME_SUBTITLE', type: '/chatbot', bg: 'bg-primary text-white', icon: 'bi-chat-dots-fill' },
   ];
 
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     private router: Router) {
 
   }

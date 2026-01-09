@@ -4,14 +4,19 @@
     "BRAND": "SETemplate"
   },
   "NAVIGATION": {
-    "DASHBOARD": "Dashboard"
+    "DASHBOARD": "Dashboard",
+    "CHATBOT": "IT Support Chat",
+    "CHAT_HISTORY": "Chat History"
   },
   "AUTH": {
     "LOGIN": "Login",
     "LOGOUT": "Logout",
     "EMAIL": "Email",
     "PASSWORD": "Password",
-    "LOGIN_ERROR": "Login failed"
+    "LOGIN_ERROR": "Login failed. Please check your credentials.",
+    "LOGIN_SUBTITLE": "Sign in to continue",
+    "LOGGING_IN": "Logging in...",
+    "DEMO_ACCOUNTS": "Demo Accounts (click to fill)"
   },
   "COMMON": {
     "SAVE": "Save",
@@ -33,6 +38,13 @@
   "DASHBOARD": {
     "TITLE": "Dashboard",
     "WELCOME": "Welcome to SETemplate!",
+    "IT_SUPPORT_TITLE": "IT Support",
+    "IT_SUPPORT_SUBTITLE": "Your personal IT support assistant is here to help you",
+    "NEED_HELP": "Need Help?",
+    "HELP_DESCRIPTION": "Our IT support assistant helps you quickly and easily with all technical problems. Just ask your question!",
+    "ASK_FOR_HELP": "Ask for Help",
+    "LOGGED_IN_AS": "Logged in as",
+    "LOGIN_PROMPT": "Sign in to use IT support",
     "PUBLIC_ACCESS": "Public Access",
     "PROTECTED_AREA": "Protected Area",
     "STATISTICS": "Statistics",
@@ -74,5 +86,53 @@
     "DARK": "Dark",
     "SWITCH_TO_LIGHT": "Switch to light theme",
     "SWITCH_TO_DARK": "Switch to dark theme"
+  },
+  "CHATBOT": {
+    "WELCOME_TITLE": "IT Support Assistant",
+    "WELCOME_SUBTITLE": "Hello! I'm your personal IT support assistant. Describe your problem and I'll be happy to help you.",
+    "START_CHAT": "Start Chat",
+    "ASSISTANT_NAME": "IT Support Assistant",
+    "MARK_RESOLVED": "Mark as Resolved",
+    "END_CHAT": "End Chat",
+    "INPUT_PLACEHOLDER": "Type your message...",
+    "INPUT_HINT": "Press Enter to send, Shift+Enter for new line",
+    "FEATURE_FAST": "Fast Responses",
+    "FEATURE_SECURE": "Secure & Confidential",
+    "FEATURE_24_7": "24/7 Available",
+    "COMMON_TOPICS": "Common Topics:",
+    "TOPIC_PRINTER": "Printer",
+    "TOPIC_NETWORK": "Network",
+    "TOPIC_PASSWORD": "Password",
+    "TOPIC_SOFTWARE": "Software",
+    "TOPIC_HARDWARE": "Hardware"
+  },
+  "CHAT_HISTORY": {
+    "TITLE": "Ticket History",
+    "SUBTITLE": "Your Support Tickets",
+    "FILTER": "Filter",
+    "ALL_TICKETS": "All Tickets",
+    "RESOLVED": "Resolved",
+    "UNRESOLVED": "Open",
+    "LOADING": "Loading tickets...",
+    "NO_TICKETS": "No tickets found",
+    "SELECT_TICKET": "Select a ticket to view the conversation",
+    "NO_MESSAGES": "No messages available",
+    "STATUS_LABEL": "Status",
+    "STATUS_RESOLVED": "Resolved",
+    "STATUS_UNRESOLVED": "Open",
+    "PRIORITY_LABEL": "Priority",
+    "PRIORITY_0": "Low",
+    "PRIORITY_1": "Medium",
+    "PRIORITY_2": "High",
+    "PRIORITY_3": "Critical",
+    "PRIORITY_LOW": "Low",
+    "PRIORITY_MEDIUM": "Medium",
+    "PRIORITY_HIGH": "High",
+    "PRIORITY_CRITICAL": "Critical",
+    "PROBLEM": "Problem",
+    "CONVERSATION": "Conversation",
+    "YOU": "You",
+    "ASSISTANT": "Assistant",
+    "SYSTEM_INFO": "System Information"
   }
 }
