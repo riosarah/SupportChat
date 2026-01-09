@@ -31,7 +31,7 @@ namespace SupportChat.ConApp.Apps
             return (userName, email, password, 30, role);
         }
 
-        partial void CreateAccounts()
+        static partial void CreateAccounts()
         {
             Task.Run(async () =>
             {
