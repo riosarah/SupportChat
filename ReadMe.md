@@ -1,8 +1,11 @@
 ﻿# SupportChat - IT Support Chatbot System
 
-Ein intelligentes IT-Support-System mit KI-gestütztem Chatbot für automatisierte Problembehebung und Ticket-Management.
+**SupportChat** ist ein modernes, Full-Stack IT-Support-System, das den First-Level-Support durch den Einsatz von Künstlicher Intelligenz automatisiert und optimiert. Das System kombiniert einen reaktionsschnellen KI-Chatbot (powered by ChatGPT via n8n) mit einem voll integrierten Ticket-Management-System. 
 
----
+Diese Lösung wurde entwickelt, um Benutzern bei alltäglichen IT-Problemen sofortige Hilfestellung zu bieten, während gleichzeitig alle Interaktionen systematisch als Support-Tickets (inklusive Metadaten wie Status, Priorität und Systeminformationen) erfasst werden. Durch die nahtlose Speicherung des Chat-Kontextes in der Datenbank kann der KI-Agent auf den bisherigen Gesprächsverlauf zugreifen und so intelligente, kontextbezogene Dialoge führen (Multi-Turn-Conversations).
+
+Mit einem robusten **ASP.NET Core 8 Backend**, einem modernen **Angular Frontend** und flexibler **n8n Workflow-Automatisierung** bietet SupportChat eine skalierbare Architektur, die sowohl für Administratoren als auch für Endanwender intuitiv bedienbar ist.
+
 
 ## 📋 Inhaltsverzeichnis
 
